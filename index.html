@@ -285,7 +285,7 @@
 					}, 1500);
 				}, 4000);
 			});
-			var ws = new WebSocket('ws://localhost:5000');
+			var ws = new WebSocket('ws://colorizame.herokuapp.com/');
 			ws.onmessage = function(evt){
 				console.log("Escaneó");
 				var redVal = 0;
