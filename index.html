@@ -326,6 +326,7 @@
 				console.log('log: Connected');
 				setInterval(function (){
 					 ws.send("Keep alive from client"  );
+					 console.log("keep alive");
 				}, 30000);
 			};
 		});
