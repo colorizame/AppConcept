@@ -285,7 +285,7 @@
 					}, 1500);
 				}, 4000);
 			});
-			var ws = new WebSocket('ws://colorizame.herokuapp.com/');
+			var ws = new WebSocket('ws://localhost:5000');
 			ws.onmessage = function(evt){
 				console.log("Escaneó");
 				var redVal = 0;
@@ -324,6 +324,9 @@
 			// add event handler for new connection 
 			ws.onopen= function(evt){
 				console.log('log: Connected');
+				setInterval(function (){
+					 ws.send("Keep alive from client"  );
+				}, 30000);
 			};
 		});
 		</script>
