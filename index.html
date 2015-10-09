@@ -265,24 +265,36 @@
 					var redVal = 0;
 					var greenVal = 0;
 					var blueVal = 0;
+					var rVerif = false;
+					var gVerif = false;
+					var bVerif = false;
 					getVariable('colorRed', function(res) {
-						console.log(res);
+						//console.log(res);
 						redVal = res.result;
+						rVerif = true;
 					});
 					getVariable('colorGreen', function(res) {
 						greenVal = res.result;
+						gVerif = true;
 					});
 					getVariable('colorBlue', function(res) {
 						blueVal = res.result;
+						bVerif = true;
 					});
 					console.log("Valores: rgb("+redVal+","+greenVal+","+blueVal+")");
-					setTimeout(function(){
+					var verificar = setInterval(function(){
+						if (rVerif && gVerif && bVerif){
 						var valorhex = rgbToHex(redVal,greenVal,blueVal);
 						console.log(valorhex);
 						var htmlelement = '<li class="color-'+item+'" style="background:'+valorhex+';"><div class="drag-element" data-color="'+valorhex+'"><div class="drop color-'+item+'"></div><i class="drop-helper-1 color-'+item+'"></i><i class="drop-helper-2 color-'+item+'"></i><i class="drop-helper-3 color-'+item+'"></i><i class="drop-helper-4 color-'+item+'"></i></div></li>';
 							item = item + 1;
 							$('ul.color-tool').append(htmlelement);
-					}, 1500);
+							rVerif = false;
+							gVerif = false;
+							bVerif = false;
+							clearInterval(verificar);
+						}
+					}, 100);
 				}, 4000);
 			});
 			var ws = new WebSocket('ws://colorizame.herokuapp.com/');
