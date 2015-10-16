@@ -281,7 +281,7 @@
 						blueVal = res.result;
 						bVerif = true;
 					});
-					console.log("Valores: rgb("+redVal+","+greenVal+","+blueVal+")");
+					//console.log("Valores: rgb("+redVal+","+greenVal+","+blueVal+")");
 					var verificar = setInterval(function(){
 						if (rVerif && gVerif && bVerif){
 						var valorhex = rgbToHex(redVal,greenVal,blueVal);
@@ -306,21 +306,20 @@
 					getVariable('colorRed', function(res) {
 						console.log(res);
 						redVal = res.result;
+						getVariable('colorGreen', function(res) {
+							greenVal = res.result;
+							getVariable('colorBlue', function(res) {
+								blueVal = res.result;
+								var valorhex = rgbToHex(redVal,greenVal,blueVal);
+								console.log(valorhex);
+								var htmlelement = '<li class="color-'+item+'" style="background:'+valorhex+';"><div class="drag-element" data-color="'+valorhex+'"><div class="drop color-'+item+'"></div><i class="drop-helper-1 color-'+item+'"></i><i class="drop-helper-2 color-'+item+'"></i><i class="drop-helper-3 color-'+item+'"></i><i class="drop-helper-4 color-'+item+'"></i></div></li>';
+									item = item + 1;
+								$('ul.color-tool').append(htmlelement);
+								//console.log("Valores: rgb("+redVal+","+greenVal+","+blueVal+")");
+							});
+						});
 					});
-					getVariable('colorGreen', function(res) {
-						greenVal = res.result;
-					});
-					getVariable('colorBlue', function(res) {
-						blueVal = res.result;
-					});
-					console.log("Valores: rgb("+redVal+","+greenVal+","+blueVal+")");
-					setTimeout(function(){
-						var valorhex = rgbToHex(redVal,greenVal,blueVal);
-						console.log(valorhex);
-						var htmlelement = '<li class="color-'+item+'" style="background:'+valorhex+';"><div class="drag-element" data-color="'+valorhex+'"><div class="drop color-'+item+'"></div><i class="drop-helper-1 color-'+item+'"></i><i class="drop-helper-2 color-'+item+'"></i><i class="drop-helper-3 color-'+item+'"></i><i class="drop-helper-4 color-'+item+'"></i></div></li>';
-							item = item + 1;
-							$('ul.color-tool').append(htmlelement);
-					}, 1500);
+					
 			};
 
 			// add event handler for diconnection 
